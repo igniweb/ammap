@@ -21,36 +21,52 @@
                     areas: [
                         {
                             id: 'FR',
-                            groupId: 'europe',
-                            showAsSelected: true
+                            color: '#f7b100',
+                            rollOverColor: '#e6a000',
+                            rollOverOutlineColor: '#a2a3a4',
+                            groupId: 'europe'
                         },
                         {
                             id: 'DE',
-                            groupId: 'europe',
-                            showAsSelected: true
+                            color: '#f7b100',
+                            rollOverColor: '#e6a000',
+                            rollOverOutlineColor: '#a2a3a4',
+                            groupId: 'europe'
                         },
                         {
                             id: 'BR',
+                            color: '#7331fd',
+                            rollOverColor: '#6220dc',
+                            rollOverOutlineColor: '#a2a3a4',
                             groupId: 'south-america'
                         },
                         {
                             id: 'BO',
+                            color: '#7331fd',
+                            rollOverColor: '#6220dc',
+                            rollOverOutlineColor: '#a2a3a4',
                             groupId: 'south-america'
                         }
                     ]
                 },
                 areasSettings: {
-                    autoZoom: true,
-                    unlistedAreasOutlineAlpha: 0.5
+                    autoZoom: true
                 },
                 zoomControl: {
                     zoomControlEnabled: false
                 },
                 mouseWheelZoomEnabled: false,
                 zoomOnDoubleClick: false,
+                balloonLabelFunction: function (mapObject) {
+                    return '';
+                },
                 clickMapObject: function (mapObject) {
                     this.zoomToGroup(mapObject.groupId);
                 }
+            });
+
+            map.addListener('homeButtonClicked', function () {
+                console.log(map);
             });
         });
     </script>
