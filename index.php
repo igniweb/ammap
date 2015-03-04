@@ -40,15 +40,15 @@
                 }
             });
 
-            map.addListener('homeButtonClicked', function (data) {
-                console.log(data.chart);
+            map.addListener('homeButtonClicked', function (event) {
+                console.log(event.chart);
             });
-            
-            map.addListener('clickMapObject', function (data) {
-                if (typeof data.mapObject.cname !== 'undefined') {
-                    if (data.mapObject.cname === 'MapArea') {
-                        console.log(data.mapObject);
-                        data.chart.zoomToSelectedObject(data.mapObject.parentObject);
+
+            map.addListener('clickMapObject', function (event) {
+                if (typeof event.mapObject.cname !== 'undefined') {
+                    if (event.mapObject.cname === 'MapArea') {
+                        console.log(event.mapObject);
+                        event.chart.zoomToSelectedObject(event.mapObject.parentObject);
                     }
                 }
             });
