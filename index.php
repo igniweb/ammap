@@ -8,7 +8,7 @@
 <body>
     <div id="map" style="width: 1024px; height: 768px; margin: 30px;"></div>
     <script type="text/javascript" src="./assets/js/ammap.js"></script>
-    <script type="text/javascript" src="./assets/js/maps/worldHigh.js"></script>
+    <script type="text/javascript" src="./assets/js/maps/continentsHigh.js"></script>
     <script type="text/javascript" src="./assets/js/lang/fr.js"></script>
     <script type="text/javascript">
         AmCharts.ready(function () {
@@ -17,35 +17,13 @@
                 language: 'fr',
                 pathToImages: './assets/medias/ammap/',
                 dataProvider: {
-                    map: 'worldHigh',
+                    map: 'continentsHigh',
                     areas: [
                         {
-                            id: 'FR',
+                            id: 'south_america',
                             color: '#f7b100',
                             rollOverColor: '#e6a000',
-                            rollOverOutlineColor: '#a2a3a4',
-                            groupId: 'europe'
-                        },
-                        {
-                            id: 'DE',
-                            color: '#f7b100',
-                            rollOverColor: '#e6a000',
-                            rollOverOutlineColor: '#a2a3a4',
-                            groupId: 'europe'
-                        },
-                        {
-                            id: 'BR',
-                            color: '#7331fd',
-                            rollOverColor: '#6220dc',
-                            rollOverOutlineColor: '#a2a3a4',
-                            groupId: 'south-america'
-                        },
-                        {
-                            id: 'BO',
-                            color: '#7331fd',
-                            rollOverColor: '#6220dc',
-                            rollOverOutlineColor: '#a2a3a4',
-                            groupId: 'south-america'
+                            rollOverOutlineColor: '#ffffff'
                         }
                     ]
                 },
@@ -59,14 +37,20 @@
                 zoomOnDoubleClick: false,
                 balloonLabelFunction: function (mapObject) {
                     return '';
-                },
-                clickMapObject: function (mapObject) {
-                    this.zoomToGroup(mapObject.groupId);
                 }
             });
 
-            map.addListener('homeButtonClicked', function () {
-                console.log(map);
+            map.addListener('homeButtonClicked', function (data) {
+                console.log(data.chart);
+            });
+            
+            map.addListener('clickMapObject', function (data) {
+                if (typeof data.mapObject.cname !== 'undefined') {
+                    if (data.mapObject.cname === 'MapArea') {
+                        console.log(data.mapObject);
+                        data.chart.zoomToSelectedObject(data.mapObject.parentObject);
+                    }
+                }
             });
         });
     </script>
