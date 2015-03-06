@@ -14,12 +14,62 @@
         AmCharts.ready(function () {
             var svgPath = 'M16,22.375L7.116,28.83l3.396-10.438l-8.883-6.458l10.979,0.002L16.002,1.5l3.391,10.434h10.981l-8.886,6.457l3.396,10.439L16,22.375L16,22.375z';
 
-            function _zoomToSouthAmerica(event) {
+            function _zoomToDefault(event) {
                 event.chart.zoomToGroup('south_america');
             }
 
             function _zoomToSelectedGroupId(event) {
                 event.chart.zoomToGroup(event.chart.selectedObject.groupId);
+            }
+
+            function _setAreas() {
+                var areas = [];
+
+                var _areas = [
+                    { id: 'GF', color: '#3366ff' },
+                    { id: 'BR', color: '#708d23' },
+                    { id: 'CO', color: '#ffe436' },
+                    { id: 'PE', color: '#a91101' },
+                    { id: 'BO', color: '#edff0c' },
+                    { id: 'EC', color: '#bababa' },
+                    { id: 'VE', color: '#bababa' }
+                ];
+
+                for (var i = 0 ; i < _areas.length ; i++) {
+                    areas.push({
+                        id: _areas[i].id,
+                        groupId: 'south_america',
+                        color: _areas[i].color,
+                        rollOverColor: _areas[i].color,
+                        selectedColor: _areas[i].color,
+                        rollOverOutlineColor: '#ffffff'
+                    });
+                }
+
+                return areas;
+            }
+
+            function _setImages() {
+                var images = [];
+
+                var _images = [
+                    { title: 'Cayenne', latitude: 4.9227, longitude: -52.3269, url: 'http://igniweb.net/amsud/premiers-jours' }
+                ];
+
+                for (var i = 0 ; i < _images.length ; i++) {
+                    images.push({
+                        svgPath: svgPath,
+                        groupId: 'locations',
+                        color: '#efd807',
+                        title: _images[i].title,
+                        latitude: _images[i].latitude,
+                        longitude: _images[i].longitude,
+                        url: _images[i].url,
+                        urlTarget: '_blank'
+                    });
+                }
+
+                return images;
             }
 
             var map = AmCharts.makeChart('map', {
@@ -28,76 +78,8 @@
                 pathToImages: './assets/medias/ammap/',
                 dataProvider: {
                     map: 'worldHigh',
-                    areas: [
-                        {
-                            id: 'GF',
-                            groupId: 'south_america',
-                            color: '#22427c',
-                            rollOverColor: '#3366ff',
-                            selectedColor: '#3366ff',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'BR',
-                            groupId: 'south_america',
-                            color: '#568203',
-                            rollOverColor: '#708d23',
-                            selectedColor: '#708d23',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'CO',
-                            groupId: 'south_america',
-                            color: '#efd242',
-                            rollOverColor: '#ffe436',
-                            selectedColor: '#ffe436',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'PE',
-                            groupId: 'south_america',
-                            color: '#bf3030',
-                            rollOverColor: '#a91101',
-                            selectedColor: '#a91101',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'BO',
-                            groupId: 'south_america',
-                            color: '#f6dc12',
-                            rollOverColor: '#edff0c',
-                            selectedColor: '#edff0c',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'VE',
-                            groupId: 'south_america',
-                            color: '#cdcdcd',
-                            rollOverColor: '#bababa',
-                            selectedColor: '#bababa',
-                            rollOverOutlineColor: '#ffffff'
-                        },
-                        {
-                            id: 'EC',
-                            groupId: 'south_america',
-                            color: '#cdcdcd',
-                            rollOverColor: '#bababa',
-                            selectedColor: '#bababa',
-                            rollOverOutlineColor: '#ffffff'
-                        }
-                    ],
-                    images: [
-                        {
-                            svgPath: svgPath,
-                            title: 'Cayenne',
-                            groupId: 'locations',
-                            color: '#efd807',
-                            latitude: 4.9227,
-                            longitude: -52.3269,
-                            url: 'http://igniweb.net/amsud/premiers-jours',
-                            urlTarget: '_blank'
-                        }
-                    ]
+                    areas: _setAreas(),
+                    images: _setImages()
                 },
                 areasSettings: {
                     autoZoom: true
@@ -109,8 +91,8 @@
             });
 
             map.addListener('selectedObjectChanged', _zoomToSelectedGroupId);
-            map.addListener('homeButtonClicked', _zoomToSouthAmerica);
-            _zoomToSouthAmerica({ chart: map });
+            map.addListener('homeButtonClicked', _zoomToDefault);
+            _zoomToDefault({ chart: map });
         });
     </script>
 </body>
