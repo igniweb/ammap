@@ -53,7 +53,9 @@
                 var images = [];
 
                 var _images = [
-                    { title: 'Cayenne', latitude: 4.9227, longitude: -52.3269, url: 'http://igniweb.net/amsud/premiers-jours' }
+                    { title: 'Cayenne', latitude: 4.9227, longitude: -52.3269, url: 'http://igniweb.net/amsud/premiers-jours' },
+                    { title: 'Kourou', latitude: 5.1597, longitude: -52.6503, url: 'http://igniweb.net/amsud/le-centre-spatial' },
+                    { title: 'Macapa', latitude: 0, longitude: -51.0705, url: 'http://igniweb.net/amsud/latitude-0' }
                 ];
 
                 for (var i = 0 ; i < _images.length ; i++) {
