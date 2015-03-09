@@ -89,6 +89,7 @@
                 zoomControl: {
                     zoomControlEnabled: false
                 },
+                dragMap: false,
                 zoomOnDoubleClick: false
             });
 
